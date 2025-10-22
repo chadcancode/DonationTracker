@@ -212,10 +212,16 @@ function recalcSum(){
 function loadData(){
   // Charities
   google.script.run
-    .withFailureHandler(err => { console.log("listCharities error:", err); })
+    .withFailureHandler(err => {
+      console.log("listCharities error:", err);
+      toast("Can't load charities. Check sheet access & sign-in.");
+    })
     .withSuccessHandler(res => {
       const payload = res || {ok:false, data:[]};
-      if (payload.ok === false) console.log("listCharities failed:", payload.error||"");
+      if (payload.ok === false) {
+        console.log("listCharities failed:", payload.error||"");
+        toast("Charity list unavailable. Confirm SHEET_ID & sharing.");
+      }
       charities = payload.data || [];
       const sel1 = document.getElementById('cashOrg');
       const sel2 = document.getElementById('itemsOrg');
@@ -235,10 +241,16 @@ function loadData(){
 
   // Items for global datalist
   google.script.run
-    .withFailureHandler(err => { console.log("listItems error:", err); })
+    .withFailureHandler(err => {
+      console.log("listItems error:", err);
+      toast("Can't load value guide. Check sheet access & sign-in.");
+    })
     .withSuccessHandler(res => {
       const payload = res || {ok:false, data:[]};
-      if (payload.ok === false) console.log("listItems failed:", payload.error||"");
+      if (payload.ok === false) {
+        console.log("listItems failed:", payload.error||"");
+        toast("Value guide unavailable. Confirm SHEET_ID & sharing.");
+      }
       items = payload.data || [];
       const dl = document.getElementById('items-dl'); dl.innerHTML = "";
       items.forEach(it => { const o=document.createElement('option'); o.value = it.item; dl.appendChild(o); });
