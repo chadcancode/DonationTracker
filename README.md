@@ -124,8 +124,10 @@ You can edit/expand **Charities** and **ValueGuide_Custom** at any time — the 
 - **Buttons are disabled after I click.**  
   That’s expected briefly during submission to prevent accidental double-submits. They’ll re-enable automatically after the request finishes.
 
-- **I want to keep the web app private.**  
+- **I want to keep the web app private.**
   When deploying, set **Who has access** to **Only myself** (you’ll need to be signed in to use it).
+- **“Sorry, unable to open the file at this time.” on Safari/Brave**
+  This usually means the browser is blocking Google sign-in or the web app is deployed without **Execute as: Me** + **Anyone with the link**. Make sure you’re signed in to Google in that browser (third-party cookies enabled) and redeploy with the recommended settings, then reload the URL.
 
 ---
 
